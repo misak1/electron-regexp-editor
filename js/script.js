@@ -137,10 +137,16 @@ $(function () {
 			}
 		}
 	});
+
+	var _currentPath = remote.getGlobal('sharedObj').prop1;
+	if(_currentPath == null){
+		_currentPath = 'jsonファイルが読み込まれていません。';
+	}
+
 	footerVm = new Vue({
 		el: '#footer',
 		data: {
-			currentPath: remote.getGlobal('sharedObj').prop1
+			currentPath: _currentPath
 		}
 	});
 });
