@@ -15,7 +15,9 @@ function loadFile() {
             filters: [
                 {
                     name: 'Markdown',
-                    extensions: ['md', 'txt']
+                    // extensions: ['md', 'txt']
+                    // name: 'javascript',
+                    extensions: ['json']
                 }
             ]
         },
@@ -26,13 +28,29 @@ function loadFile() {
                         alert('error : ' + error);
                         return;
                     }
-                    mdEditor.setValue(text.toString());
+                    // mdEditor.setValue(text.toString());
                     Materialize.toast('Load complete.', 1000);
                 });
                 footerVm.currentPath = filenames[0];
+
+                // show initial value from main process (in dev console)
+                console.log(remote.getGlobal('sharedObj').prop1);
+
+                // change value of global prop1
+                remote.getGlobal('sharedObj').prop1 = filenames[0];
+
+                // show changed value in main process (in stdout, as a proof it was changed)
+                var ipcRenderer = require('electron').ipcRenderer;
+                ipcRenderer.send('show-prop1');
+
+                // show changed value in renderer process (in dev console)
+                console.log(remote.getGlobal('sharedObj').prop1);
+
             }
         });
 }
+
+
 
 /**
  * ファイルを保存する

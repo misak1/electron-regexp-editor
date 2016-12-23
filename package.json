@@ -1,16 +1,21 @@
 {
-  "name": "matelialize-markdown",
+  "name": "electron-regexp-editor",
   "version": "1.0.0",
-  "description": "Matelialized Design Markdown Editor",
+  "description": "下記のQiita投稿のサンプルソースです。",
   "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shout-star/materialize-markdown.git"
   },
-  "devDependencies": {
-  }
+  "author": "Misaki Shibata",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shout-star/materialize-markdown/issues"
+  },
+  "homepage": "https://github.com/shout-star/materialize-markdown#readme"
 }

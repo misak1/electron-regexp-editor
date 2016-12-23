@@ -26,3 +26,6 @@ app.on('ready', function() {
     mainWindow = null;
   });
 });
+
+// sharedObj
+global.sharedObj = {prop1: null};

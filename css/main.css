@@ -6,9 +6,15 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
+textarea{
+	font-family: monospace;
+}
 .split-container {
 	height: 100%;
 }
+/*.split-pane{
+	background: rgba(200, 200, 200, 0.5);
+}*/
 .split-pane-divider {
 	background: #aaa;
 	left: 50%; /* Same as left component width */
@@ -21,18 +27,49 @@ html, body {
 	left: 50%;  /* Same as left component width */
 	float: left;
 	margin-left: 5px;  /* Same as divider width */
+	/*white-space: pre-wrap;
+	font-weight: 300;
+	padding: 0 0 0 5px;*/
+	resize: none;
 }
 #nav_toolbar a {
 	cursor: pointer;
 }
+#nav_toolbar .brand-logo img{
+	padding: 5px; 
+}
 #nav_toolbar .description {
 	font-size: 20px;
+	    color:rgba(255, 255, 255, 0.8);
+    font-style: italic;
+		font-style: italic;
+    line-height: 64px;
+    display: inline-block;
+    vertical-align: top;
 }
+@media only screen and (max-width : 992px) {
+	#nav_toolbar .brand-logo img{
+		/*padding-left: 0;
+		padding-right: 0;*/
+		box-sizing: border-box;
+	}
+}
+@media only screen and (max-width : 600px) {
+	#nav_toolbar .brand-logo img{
+		width: 56px; 
+	}
+}
+
 #footer {
 	margin-top: 5px;
+	/*margin-top: 0;*/
 	padding-top: 0px;
 }
 #footer .footer-copyright {
+	line-height: 1.5;
+    height: 25px;
+}
+#footer .footer-copyright div{
 	line-height: 1.5;
     height: 25px;
 }
