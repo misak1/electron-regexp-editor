@@ -3,10 +3,20 @@
   "version": "1.0.0",
   "description": "下記のQiita投稿のサンプルソースです。",
   "main": "main.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+  },
+  "devDependencies": {
+    "clean-css": "^3.4.23",
+    "npm-run-all": "^3.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css:css1": "cleancss css/materialize.css > css/materialize.min.css",
+    "css:css2": "cleancss css/codemirror.css > css/codemirror.min.css",
+    "css:css3": "cleancss css/github-markdown.css > css/github-markdown.min.css",
+    "css:css4": "cleancss css/main.css > css/main.min.css",
+    "css:css5": "cleancss css/split-pane.css > css/split-pane.min.css",
+    "css": "npm-run-all css:*"
   },
   "repository": {
     "type": "git",
