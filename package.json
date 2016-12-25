@@ -4,6 +4,10 @@
   "description": "下記のQiita投稿のサンプルソースです。",
   "main": "main.js",
   "dependencies": {
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.37.8",
+    "rimraf": "^2.5.4",
+    "zip-folder": "^1.0.0"
   },
   "devDependencies": {
     "clean-css": "^3.4.23",
@@ -11,12 +15,16 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
     "css:css1": "cleancss css/materialize.css > css/materialize.min.css",
     "css:css2": "cleancss css/codemirror.css > css/codemirror.min.css",
     "css:css3": "cleancss css/github-markdown.css > css/github-markdown.min.css",
     "css:css4": "cleancss css/main.css > css/main.min.css",
     "css:css5": "cleancss css/split-pane.css > css/split-pane.min.css",
-    "css": "npm-run-all css:*"
+    "css": "npm-run-all css:*",
+    "build:osx": "electron-packager . REE --platform=darwin --arch=x64 --icon=./images/app.icns --out=./bin",
+    "build:win32": "electron-packager . REE --platform=win32 --arch=x64 --icon=./images/app.ico --out=./bin",
+    "build": "npm-run-all build:*"
   },
   "repository": {
     "type": "git",
