@@ -1,8 +1,37 @@
 var remote = require('remote');
 var fs = require('fs');
+var open = require('open');
 var dialog = remote.require('dialog');
 var browserWindow = remote.require('browser-window');
 
+
+
+function loadRexExp(filenames) {
+    fs.readFile(filenames, function (error, text) {
+        if (error != null) {
+            alert('error : ' + error);
+            return;
+        }
+        // mdEditor.setValue(text.toString());
+        Materialize.toast('Load complete.', 1000);
+    });
+    footerVm.currentPath = filenames;
+
+    // show initial value from main process (in dev console)
+    console.log(remote.getGlobal('sharedObj').prop1);
+
+    // change value of global prop1
+    remote.getGlobal('sharedObj').prop1 = filenames;
+
+    // show changed value in main process (in stdout, as a proof it was changed)
+    var ipcRenderer = require('electron').ipcRenderer;
+    ipcRenderer.send('show-prop1');
+
+    // show changed value in renderer process (in dev console)
+    console.log(remote.getGlobal('sharedObj').prop1);
+
+    trigger_regExpfilter();
+}
 /**
  * ファイルを開く
  */
@@ -23,33 +52,25 @@ function loadFile() {
         },
         function (filenames) {
             if (filenames) {
-                fs.readFile(filenames[0], function (error, text) {
-                    if (error != null) {
-                        alert('error : ' + error);
-                        return;
-                    }
-                    // mdEditor.setValue(text.toString());
-                    Materialize.toast('Load complete.', 1000);
-                });
-                footerVm.currentPath = filenames[0];
-
-                // show initial value from main process (in dev console)
-                console.log(remote.getGlobal('sharedObj').prop1);
-
-                // change value of global prop1
-                remote.getGlobal('sharedObj').prop1 = filenames[0];
-
-                // show changed value in main process (in stdout, as a proof it was changed)
-                var ipcRenderer = require('electron').ipcRenderer;
-                ipcRenderer.send('show-prop1');
-
-                // show changed value in renderer process (in dev console)
-                console.log(remote.getGlobal('sharedObj').prop1);
-
+                var filename = filenames[0];
+                loadRexExp(filename);
             }
         });
 }
 
+/**
+ * ファイルを保存する
+ */
+function openFile() {
+    var prop1 = remote.getGlobal('sharedObj').prop1;
+
+    if (prop1 == null) {
+        Materialize.toast('jsonファイル読込み後に実行して下さい。', 1000);
+        return;
+    } else {
+        open(prop1);
+    }
+}
 
 
 /**

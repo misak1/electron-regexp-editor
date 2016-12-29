@@ -1,39 +1,35 @@
 {
   "name": "electron-regexp-editor",
   "version": "1.0.0",
-  "description": "下記のQiita投稿のサンプルソースです。",
+  "description": "複数の正規表現置換をリアルタイムに実行してくれるエディタです。",
   "main": "main.js",
   "dependencies": {
-    "electron-packager": "^5.2.1",
+    "electron-json-storage": "^2.1.0",
     "electron-prebuilt": "^0.37.8",
-    "rimraf": "^2.5.4",
-    "zip-folder": "^1.0.0"
+    "electron-workers": "^1.10.0",
+    "mkdirp": "^0.5.1",
+    "open": "^0.0.5",
+    "path": "^0.12.7",
+    "superagent": "^3.3.1"
   },
   "devDependencies": {
-    "clean-css": "^3.4.23",
     "npm-run-all": "^3.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "css:css1": "cleancss css/materialize.css > css/materialize.min.css",
-    "css:css2": "cleancss css/codemirror.css > css/codemirror.min.css",
-    "css:css3": "cleancss css/github-markdown.css > css/github-markdown.min.css",
-    "css:css4": "cleancss css/main.css > css/main.min.css",
-    "css:css5": "cleancss css/split-pane.css > css/split-pane.min.css",
-    "css": "npm-run-all css:*",
-    "build:osx": "electron-packager . REE --platform=darwin --arch=x64 --icon=./images/app.icns --out=./bin",
-    "build:win32": "electron-packager . REE --platform=win32 --arch=x64 --icon=./images/app.ico --out=./bin",
+    "build:darwin": "electron-packager . REE --out=bin --overwrite --platform=darwin --arch=x64 --version=0.37.8 --icon=images/app.icns",
+    "build:win32": "electron-packager . REE --out=bin --overwrite --platform=win32 --arch=x64 --version=0.37.8 --icon=images/app.ico",
     "build": "npm-run-all build:*"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shout-star/materialize-markdown.git"
+    "url": "git+https://github.com/misak1/electron-regexp-editor.git"
   },
-  "author": "Misaki Shibata",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shout-star/materialize-markdown/issues"
+    "url": "https://github.com/misak1/electron-regexp-editor/issues"
   },
-  "homepage": "https://github.com/shout-star/materialize-markdown#readme"
+  "homepage": "https://github.com/misak1/electron-regexp-editor#readme"
 }

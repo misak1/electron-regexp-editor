@@ -5468,7 +5468,7 @@ background-color: #660000;
       -ms-transform: translateX(-50%);
       -o-transform: translateX(-50%);
       transform: translateX(-50%); }
-    @media only screen and (max-width : 992px) {
+    /*@media only screen and (max-width : 992px) {
       nav .brand-logo {
         left: 50%;
         -webkit-transform: translateX(-50%);
@@ -5487,7 +5487,7 @@ background-color: #660000;
           left: 0.5rem; }
         nav .brand-logo.right {
           right: 0.5rem;
-          left: auto; } }
+          left: auto; } }*/
     nav .brand-logo.right {
       right: 0.5rem;
       padding: 0; }

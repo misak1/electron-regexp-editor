@@ -1,4 +1,4 @@
-bin
+bin/
 
 ### https://raw.github.com/github/gitignore/8f35779cefbabdca21cfc4cda55abb1290d59fd9/node.gitignore
 
@@ -41,3 +41,4 @@ jspm_packages
 .node_repl_history
 
 
+bin

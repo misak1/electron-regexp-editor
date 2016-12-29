@@ -29,3 +29,5 @@ app.on('ready', function() {
 
 // sharedObj
 global.sharedObj = {prop1: null};
+global.sharedObj = {userData: app.getPath('userData')};
+
