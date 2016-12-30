@@ -43,8 +43,8 @@ app.on('ready', function () {
         // title: package_info.config.appname
     })
     // and load the index.html of the app.
-    console.log('file://' + __dirname + '/index.html');
-    browserWindow.loadURL('file://' + __dirname + '/index.html')
+    browserWindow.loadURL('file://' + __dirname + '/contents.html') // webviewデバッグ
+    // browserWindow.loadURL('file://' + __dirname + '/index.html')
 
     let application_menu = [{
         label: "Edit",
@@ -64,7 +64,6 @@ app.on('ready', function () {
             label: 'Search in File',
             accelerator: 'CmdOrCtrl+F',
             click() {
-                // browserWindow.webContents.send('toggleSearch')
                 browserWindow.webContents.send('toggleSearch')
             }
         }, {

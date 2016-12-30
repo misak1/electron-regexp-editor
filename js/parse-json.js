@@ -17,6 +17,7 @@ module.exports = function (path, expand) {
     }
 
     this.read = function () {
+        console.log('this.path', this.path);
         var json = this.validateJSON(fs.readFileSync(this.path, "UTF-8"));
         var aw = expand ? JSON.stringify(json) : JSON.stringify(json, " ", 4);
         return aw;

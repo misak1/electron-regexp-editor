@@ -102,6 +102,9 @@ function elLeftVmForcus() {
 
 
 function regExpfilter(input, filepath) {
+	if(filepath == null){
+		return input;
+	}
 
 	var pj = new parseJson(filepath);
 	console.log(pj.read());

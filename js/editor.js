@@ -2,10 +2,8 @@
 var remote = require('electron').remote;
 var fs = require('fs');
 var open = require('open');
-var dialog = require('electron');
-var browserWindow = require('electron');
-
-
+var dialog = remote.dialog;
+var browserWindow = remote.BrowserWindow;
 
 function loadRexExp(filenames) {
     fs.readFile(filenames, function (error, text) {
