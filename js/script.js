@@ -258,6 +258,7 @@ $(function () {
 			fs.writeFile(path, contents, cb)
 		})
 	}
+	var remote = require('electron').remote;
 	var userData = remote.getGlobal('sharedObj').userData;
 	console.log('userData:', userData);
 	var request = require('superagent');

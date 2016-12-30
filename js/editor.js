@@ -1,8 +1,9 @@
-var remote = require('remote');
+// var remote = require('remote');
+var remote = require('electron').remote;
 var fs = require('fs');
 var open = require('open');
-var dialog = remote.require('dialog');
-var browserWindow = remote.require('browser-window');
+var dialog = require('electron');
+var browserWindow = require('electron');
 
 
 

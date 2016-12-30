@@ -1,31 +1,122 @@
-'use strict';
+const electron = require('electron')
+// Module to control application life.
+const app = electron.app
+// Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow
 
-var app = require('app');
-var BrowserWindow = require('browser-window');
+// const remote = electron;
+const {Menu, MenuItem} = electron
 
-require('crash-reporter').start();
+const menu = new Menu()
+menu.append(new MenuItem({ label: 'MenuItem1', click() { console.log('item 1 clicked'); } }))
+menu.append(new MenuItem({ type: 'separator' }))
+menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
 
-var mainWindow = null;
 
-app.on('window-all-closed', function() {
-  if (process.platform != 'darwin')
-    app.quit();
-});
+let package_info = require('./package.json')
 
-app.on('ready', function() {
+// Quit when all windows are closed.
+// 全てのウィンドウが閉じたら終了
+app.on('window-all-closed', function () {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
+    if (process.platform != 'darwin') {
+        app.quit()
+    }
+})
 
-  // ブラウザ(Chromium)の起動, 初期画面のロード
-  mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    title: "Materialized Design Markdown Editor",
-  });
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+let fs = require('fs')
 
-  mainWindow.on('closed', function() {
-    mainWindow = null;
-  });
-});
+// メインウィンドウはGCされないようにグローバル宣言
+//let browserWindow;
+let browserWindow
+
+// let electron = require('electron');
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', function () {
+    // Create the browser window.
+    browserWindow = new BrowserWindow({
+        width: 1024,
+        height: 768,
+        // title: package_info.config.appname
+    })
+    // and load the index.html of the app.
+    console.log('file://' + __dirname + '/index.html');
+    browserWindow.loadURL('file://' + __dirname + '/index.html')
+
+    let application_menu = [{
+        label: "Edit",
+        submenu: [{
+            label: "Cut",
+            accelerator: "CmdOrCtrl+X",
+            selector: "cut:"
+        }, {
+            label: "Copy",
+            accelerator: "CmdOrCtrl+C",
+            selector: "copy:"
+        }, {
+            label: "Paste",
+            accelerator: "CmdOrCtrl+V",
+            selector: "paste:"
+        }, {
+            label: 'Search in File',
+            accelerator: 'CmdOrCtrl+F',
+            click() {
+                // browserWindow.webContents.send('toggleSearch')
+                browserWindow.webContents.send('toggleSearch')
+            }
+        }, {
+            label: 'Debug',
+            submenu: [
+                {
+                    label: 'Toggle Developer Tools',
+                    accelerator: (function () {
+                        if (process.platform == 'darwin')
+                            return 'Alt+Command+I';
+                        else
+                            return 'Ctrl+Shift+I';
+                    })(),
+                    click(item, focusedWindow) {
+                        if (focusedWindow)
+                            focusedWindow.webContents.toggleDevTools();
+                    }
+                }
+            ]
+        }]
+    }]
+    if (process.platform == 'darwin') {
+        let app_name = package_info.config.appname
+        application_menu.unshift({
+            label: app_name,
+            submenu: [{
+                label: 'About ' + app_name,
+                role: 'about'
+            }, {
+                label: 'Quit',
+                accelerator: 'CmdOrCtrl+Q',
+                click: function () {
+                    app.quit();
+                }
+            },]
+        })
+    }
+    let menu = Menu.buildFromTemplate(application_menu)
+    Menu.setApplicationMenu(menu)
+
+    // Emitted when the window is closed.
+    browserWindow.on('closed', function () {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        browserWindow = null
+    })
+
+    //browserWindow.toggleDevTools()
+    // Open the DevTools.
+    browserWindow.webContents.openDevTools()
+})
 
 // sharedObj
 global.sharedObj = {prop1: null};
