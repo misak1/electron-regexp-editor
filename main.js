@@ -12,7 +12,6 @@ menu.append(new MenuItem({ label: 'MenuItem1', click() { console.log('item 1 cli
 menu.append(new MenuItem({ type: 'separator' }))
 menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
 
-
 let package_info = require('./package.json')
 
 // Quit when all windows are closed.
@@ -43,8 +42,8 @@ app.on('ready', function () {
         // title: package_info.config.appname
     })
     // and load the index.html of the app.
-    browserWindow.loadURL('file://' + __dirname + '/contents.html') // webviewデバッグ
-    // browserWindow.loadURL('file://' + __dirname + '/index.html')
+    // browserWindow.loadURL('file://' + __dirname + '/contents.html') // webviewデバッグ
+    browserWindow.loadURL('file://' + __dirname + '/index.html')
 
     let application_menu = [{
         label: "Edit",
@@ -60,6 +59,10 @@ app.on('ready', function () {
             label: "Paste",
             accelerator: "CmdOrCtrl+V",
             selector: "paste:"
+        }, {
+            label: "Select All",
+            accelerator: "CmdOrCtrl+A",
+            selector: "selectAll:"
         }, {
             label: 'Search in File',
             accelerator: 'CmdOrCtrl+F',
@@ -118,6 +121,6 @@ app.on('ready', function () {
 })
 
 // sharedObj
-global.sharedObj = {prop1: null};
-global.sharedObj = {userData: app.getPath('userData')};
+global.sharedObj = { prop1: null };
+global.sharedObj = { userData: app.getPath('userData') };
 
