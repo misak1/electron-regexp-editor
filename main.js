@@ -117,7 +117,7 @@ app.on('ready', function () {
 
     //browserWindow.toggleDevTools()
     // Open the DevTools.
-    browserWindow.webContents.openDevTools()
+    // browserWindow.webContents.openDevTools()
 })
 
 // sharedObj
