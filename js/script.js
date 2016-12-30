@@ -306,16 +306,17 @@ $(function () {
 										writeFile(filepath, b.toString(), function (err) {
 											if (err == null) {
 												data[key] = filepath;
+
+												console.log("------------------------");
+												console.log(data);
+
+												// 設定更新
+												storage.set('config', data, function (error) {
+													if (error) throw error;
+												});
 											} else {
 												console.log(err);
 											}
-										});
-										console.log("------------------------");
-										console.log(data);
-
-										// 設定更新
-										storage.set('config', data, function (error) {
-											if (error) throw error;
 										});
 									}catch(e){
 										Materialize.toast(JSON.stringify(res.body), 30000);

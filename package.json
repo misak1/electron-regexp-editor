@@ -25,8 +25,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build:darwin": "electron-packager . REE --out=bin --overwrite --platform=darwin --arch=x64 --version=0.37.8 --icon=images/app.icns",
-    "build:win32": "electron-packager . REE --out=bin --overwrite --platform=win32 --arch=x64 --version=0.37.8 --icon=images/app.ico",
+    "build:darwin": "electron-packager . REE --out=bin --overwrite --platform=darwin --arch=x64 --version=1.4.13 --icon=images/app.icns",
+    "build:win32": "electron-packager . REE --out=bin --overwrite --platform=win32 --arch=x64 --version=1.4.13 --icon=images/app.ico",
     "build": "npm-run-all build:*"
   },
   "repository": {
