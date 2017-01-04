@@ -12,6 +12,7 @@ menu.append(new MenuItem({ label: 'MenuItem1', click() { console.log('item 1 cli
 menu.append(new MenuItem({ type: 'separator' }))
 menu.append(new MenuItem({ label: 'MenuItem2', type: 'checkbox', checked: true }))
 
+var force_quit = false;
 let package_info = require('./package.json')
 
 // Quit when all windows are closed.
@@ -20,15 +21,24 @@ app.on('window-all-closed', function () {
     // On OS X it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform != 'darwin') {
+        //force_quit=true; 
         app.quit()
     }
 })
+// This is another place to handle events after all windows are closed
+app.on('will-quit', function () {
+    // This is a good place to add tests insuring the app is still
+    // responsive and all windows are closed.
+    console.log("will-quit");
+    mainWindow = null;
+})
+
 
 let fs = require('fs')
 
 // メインウィンドウはGCされないようにグローバル宣言
 //let browserWindow;
-let browserWindow
+let browserWindow = null;
 
 // let electron = require('electron');
 
@@ -42,8 +52,8 @@ app.on('ready', function () {
         // title: package_info.config.appname
     })
     // and load the index.html of the app.
-    // browserWindow.loadURL('file://' + __dirname + '/contents.html') // webviewデバッグ
-    browserWindow.loadURL('file://' + __dirname + '/index.html')
+    browserWindow.loadURL('file://' + __dirname + '/contents.html') // webviewデバッグ
+    // browserWindow.loadURL('file://' + __dirname + '/index.html')
 
     let application_menu = [{
         label: "Edit",
@@ -108,12 +118,28 @@ app.on('ready', function () {
     Menu.setApplicationMenu(menu)
 
     // Emitted when the window is closed.
-    browserWindow.on('closed', function () {
+    browserWindow.on('closed', function (e) {
         // Dereference the window object, usually you would store windows
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
-        browserWindow = null
+        // console.log("close");
+        // if (!force_quit) {
+        //     e.preventDefault();
+        //     browserWindow.hide();
+        // }
+        app.quit();
     })
+    // You can use 'before-quit' instead of (or with) the close event
+    app.on('before-quit', function (e) {
+        // Handle menu-item or keyboard shortcut quit here
+        // console.log("before-quit");
+        // force_quit = true;
+    });
+
+    app.on('activate', function () {
+        // console.log("reactive");
+        browserWindow.show();
+    });
 
     //browserWindow.toggleDevTools()
     // Open the DevTools.

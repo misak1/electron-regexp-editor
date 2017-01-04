@@ -102,7 +102,7 @@ function elLeftVmForcus() {
 
 
 function regExpfilter(input, filepath) {
-	if(filepath == null){
+	if (filepath == null) {
 		return input;
 	}
 
@@ -123,7 +123,7 @@ function regExpfilter(input, filepath) {
 	return input;
 }
 
-
+var currentText = '';
 function trigger_regExpfilter() {
 	var filepath = remote.getGlobal('sharedObj').prop1;
 	editorVm.input = regExpfilter($('#editor_textarea').val(), filepath);
@@ -171,8 +171,8 @@ $(function () {
 	mdEditor.on(
 		'change',
 		function () {
+			currentText = $('#editor_textarea').val();
 			mdEditor.save();
-
 			trigger_regExpfilter();
 		}
 	);
@@ -183,6 +183,7 @@ $(function () {
 			var searchText = $(this).val();
 			storage.get('config', function (error, data) {
 				if (searchText in data) {
+					$('#editor_textarea').val(currentText);
 					loadRexExp(data[searchText]);
 				}
 			});
@@ -299,7 +300,7 @@ $(function () {
 								// GitHub WEB API
 								.get(data_url)
 								.end(function (err, res) {
-									try{
+									try {
 										var b = new Buffer(res.body.content, 'base64');
 										var filepath = userData + path.sep + key;
 										console.log('filepath', filepath);
@@ -318,7 +319,7 @@ $(function () {
 												console.log(err);
 											}
 										});
-									}catch(e){
+									} catch (e) {
 										Materialize.toast(JSON.stringify(res.body), 30000);
 									}
 								});

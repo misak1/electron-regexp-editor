@@ -20,6 +20,7 @@
     "superagent": "^3.3.1"
   },
   "devDependencies": {
+    "clean-css": "^3.4.23",
     "npm-run-all": "^3.1.2"
   },
   "scripts": {
@@ -27,7 +28,10 @@
     "start": "electron .",
     "build:darwin": "electron-packager . REE --out=bin --overwrite --platform=darwin --arch=x64 --version=1.4.13 --icon=images/app.icns",
     "build:win32": "electron-packager . REE --out=bin --overwrite --platform=win32 --arch=x64 --version=1.4.13 --icon=images/app.ico",
-    "build": "npm-run-all build:*"
+    "build": "npm-run-all build:*",
+    "css:main": "cleancss css/main.css",
+    "css:materialize": "cleancss css/materialize.css",
+    "css": " npm-run-all css:*"
   },
   "repository": {
     "type": "git",
