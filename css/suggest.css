@@ -51,6 +51,7 @@
     #suggest{
         width:auto;
         z-index:3;
+        max-width: initial;
     }
     .regexp-search {
         width: calc(100vw - 200px);
