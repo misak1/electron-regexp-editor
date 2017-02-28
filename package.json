@@ -31,6 +31,7 @@
     "build": "npm-run-all build:*",
     "css:main": "cleancss css/main.css",
     "css:materialize": "cleancss css/materialize.css",
+    "css:suggest": "cleancss css/suggest.css",
     "css": " npm-run-all css:*"
   },
   "repository": {

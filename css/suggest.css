@@ -1,5 +1,5 @@
-		#suggest {
-    position: absolute;
+#suggest {
+    /*position: absolute;
     background-color: #FFFFFF;
     border: 1px solid #CCCCFF;
     font-size: 90%;
@@ -8,7 +8,18 @@
 		left: 1rem;
     padding: 4px;
     box-sizing: border-box;
-    z-index: 2;		
+    z-index: 2;*/
+    position: fixed;
+    right: 16px;
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCFF;
+    font-size: 90%;
+    width: 100%;
+    max-width: calc(100vw - 484px);
+    color: #aaa;
+    padding: 4px;
+    box-sizing: border-box;
+    z-index: 3;
 }
 #suggest div {
     display: block;
@@ -24,7 +35,7 @@
     background-color: #99CCFF;
 }
 .regexp-search{
-	width:200px;
+	width:calc(100vw - 450px);
 	position: relative;
 }
 .regexp-search input{
@@ -35,4 +46,13 @@
 	padding:0 1rem;
 	color:#333;
 	box-sizing: border-box;
+}
+@media only screen and (max-width : 600px) {
+    #suggest{
+        width:auto;
+        z-index:3;
+    }
+    .regexp-search {
+        width: calc(100vw - 200px);
+    }
 }
